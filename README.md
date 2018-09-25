@@ -24,15 +24,19 @@ python manage.py runserver
 
 ## 五、效果图
 - 首页
+
     ![home1.png](https://upload-images.jianshu.io/upload_images/1801379-3eee8cecbcafbc0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - 闪购超市
+
     ![market1.png](https://upload-images.jianshu.io/upload_images/1801379-17bf51ee3b697b83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - 购物车
+
     ![cart1.png](https://upload-images.jianshu.io/upload_images/1801379-5093d8f588a2de58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - 我的
+
     ![mine.png](https://upload-images.jianshu.io/upload_images/1801379-f6e65fe1c074da30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
