@@ -104,3 +104,15 @@
     price1      商品折扣价格
     marketprice1    商品原价
     ```
+
+
+## 其他
+```
+git add *
+git commit -m ''
+git remote add origin git@github.com:iphone3/Python1807AXF.git
+git push -u origin master
+
+
+https://github.com/iphone3/Python1807AXF
+```
