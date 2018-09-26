@@ -106,6 +106,65 @@
     ```
 
 
+# 六、闪购超市
+```
+insert into axf_goods
+(productid,productimg,productname,productlongname,isxf,pmdesc,specifics,price,marketprice,categoryid,childcid,childcidname,dealerid,storenums,productnum) values
+("11951","http://img01.bqstatic.com/upload/goods/000/001/1951/0000011951_63930.jpg@200w_200h_90Q","","乐吧薯片鲜虾味50.0g",0,0,"50g",2.00,2.500000,103541,103543,"膨化食品","4858",200,4);
+
+    productid  商品ID
+    productimg 商品图片
+    productname 商品名称(有些可能不存在)
+    productlongname 商品长名字
+    isxf 精选
+    pmdesc 买一送一
+    specifics 规格
+    price 价格
+    marketprice 超市价格
+    categoryid 分类ID
+    childcid   子类ID
+    childcidname 子类名字
+    dealerid 详情id
+    storenums 库存量
+    productnum 销售量
+```
+
+- 元素获取
+```
+    $('.type-slider.type-item')  同一个元素包含的别名
+
+    $('.type-slider .type-item') 包含(父子....)
+
+    $('.type-slider>.type-item') 子元素(父子)
+```
+
+- js中cookie操作
+```
+# 设置cookie
+# {exprires:3, path:'/'}
+# exprires 过期时间
+# path 路径
+$.cookie(key, value, option)
+$.cookie('typeIndex', $(this).index(),{exprires:3, path:'/'})
+
+
+# 获取cookie
+$.cookie(key)
+
+# 删除cookie
+$.cookie(key, null)
+```
+
+- 分类业务处理
+```
+点击: 将typeIndex下标保存
+
+页面刷新: 先获取typeIndex ==> 根据下标设置对应的分类样式
+
+数据处理: typeIndex是存在cookie中(每次请求时，会自动带入到服务器) ==> 服务器中获取cookie中typeIndex  ==> 根据typeIndex获取categoryid  ==> 根据categoryid过滤数据
+```
+
+
 ## 其他
 ```
 git add *

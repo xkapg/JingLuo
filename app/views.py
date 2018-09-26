@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import Wheel, Nav, Mustbuy, Shop, MainShow
+from app.models import Wheel, Nav, Mustbuy, Shop, MainShow, Foodtypes, Goods
 
 
 # 首页
@@ -38,8 +38,30 @@ def home(request):
     return render(request, 'home.html', context=data)
 
 # 闪购超市
-def market(request):
-    return render(request, 'market.html')
+def market(request, categoryid):
+    # 分类数据
+    foodtypes = Foodtypes.objects.all()
+
+    # 获取点击 历史 [typeIndex]
+    # 有typeIndex
+    # 无typeIndex，默认0
+    typeIndex = int(request.COOKIES.get('typeIndex',0))
+    print(foodtypes[typeIndex])
+    categoryid = foodtypes[typeIndex].typeid
+
+
+    # 商品数据
+    # goodslist = Goods.objects.all()[1:10]
+    # 根据商品分类 数据过滤
+    goodslist = Goods.objects.filter(categoryid=categoryid)
+
+    data = {
+        'title': '闪购超市',
+        'foodtypes':foodtypes,
+        'goodslist':goodslist
+    }
+
+    return render(request, 'market.html', context=data)
 
 # 购物车
 def cart(request):
