@@ -13,6 +13,7 @@ git clone https://github.com/iphone3/Python1807AXF.git
 
 ## 三、安装项目依赖
 ```
+# 切换到项目目录中
 pip install requirements.txt
 ```
 > pip是Python3的版本!
@@ -20,6 +21,9 @@ pip install requirements.txt
 ## 四、启动项目
 ```
 python manage.py runserver
+
+# 浏览器中输入 【移动端项目，所以显示是小屏幕】
+127.0.0.1:8000/axf/
 ```
 
 ## 五、效果图
