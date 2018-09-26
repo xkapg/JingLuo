@@ -6,7 +6,7 @@
 }
 
 footer .market span {
-    background-image: url(/static/main/img/market1.png);
+    background-image: url(/static/base/img/market1.png);
 }
 footer .market dd {
     color: #ffd601;

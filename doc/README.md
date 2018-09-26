@@ -157,7 +157,7 @@ $.cookie(key, null)
 
 - 分类业务处理
 ```
-点击: 将typeIndex下标保存
+点击(分类): 将typeIndex下标保存
 
 页面刷新: 先获取typeIndex ==> 根据下标设置对应的分类样式
 
@@ -174,4 +174,17 @@ git push -u origin master
 
 
 https://github.com/iphone3/Python1807AXF
+```
+
+
+## 集成第三方SDK
+```
+- 注册账号
+- 创建应用
+    APP_ID
+    APP_KEY
+- 下载SDK包
+    导入项目中
+- 查看官方文档
+    示例代码
 ```

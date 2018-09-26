@@ -38,7 +38,7 @@ def home(request):
     return render(request, 'home.html', context=data)
 
 # 闪购超市
-def market(request, categoryid):
+def market(request, categoryid, childid, sortid):
     # 分类数据
     foodtypes = Foodtypes.objects.all()
 
@@ -50,15 +50,38 @@ def market(request, categoryid):
     categoryid = foodtypes[typeIndex].typeid
 
 
+    # 子类
+    childtypenames = foodtypes.get(typeid=categoryid).childtypenames # 对应分类下 子类字符串
+    childlist = []
+    for item in childtypenames.split('#'):
+        arr = item.split(':')
+        obj = {'childname':arr[0], 'childid':arr[1]}
+        childlist.append(obj)
+
     # 商品数据
     # goodslist = Goods.objects.all()[1:10]
+
     # 根据商品分类 数据过滤
-    goodslist = Goods.objects.filter(categoryid=categoryid)
+    if childid == '0':  # 全部分类
+        goodslist = Goods.objects.filter(categoryid=categoryid)
+    else:   # 对应分类
+        goodslist = Goods.objects.filter(categoryid=categoryid, childcid=childid)
+
+    # 排序处理
+    if sortid == '1':   # 销量排序
+        goodslist= goodslist.order_by('productnum')
+    elif sortid == '2': # 价格最低
+        goodslist= goodslist.order_by('price')
+    elif sortid == '3': # 价格最高
+        goodslist= goodslist.order_by('-price')
 
     data = {
         'title': '闪购超市',
         'foodtypes':foodtypes,
-        'goodslist':goodslist
+        'goodslist':goodslist,
+        'childlist':childlist,
+        'categoryid':categoryid,
+        'childid':childid
     }
 
     return render(request, 'market.html', context=data)
