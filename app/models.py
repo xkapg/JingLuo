@@ -147,3 +147,15 @@ class User(models.Model):
     rank = models.IntegerField(default=1)
     # token
     token = models.CharField(max_length=100)
+
+
+# 购物车 模型类
+class Cart(models.Model):
+    # 用户
+    user = models.ForeignKey(User)
+    # 商品
+    goods = models.ForeignKey(Goods)
+    # 选择数量
+    number = models.IntegerField(default=1)
+    # 是否选中
+    isselect = models.BooleanField(default=True)

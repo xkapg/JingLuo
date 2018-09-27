@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),    # 登录
     url(r'^logout/$', views.quit, name='logout'),   # 退出登录
     url(r'checkuser/$', views.checkuser, name='checkuser'), # 用户名验证
+
+    url(r'^addtocart/$', views.addtocart, name='addtocart'),    # 添加到购物车
 ]

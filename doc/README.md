@@ -164,6 +164,46 @@ $.cookie(key, null)
 数据处理: typeIndex是存在cookie中(每次请求时，会自动带入到服务器) ==> 服务器中获取cookie中typeIndex  ==> 根据typeIndex获取categoryid  ==> 根据categoryid过滤数据
 ```
 
+# 七、我的
+```
+# 用户模型类
+class User(models.Model):
+    # 账号
+    account = models.CharField(max_length=20, unique=True)
+    # 密码
+    password = models.CharField(max_length=256)
+    # 名字
+    name = models.CharField(max_length=100)
+    # 电话
+    tel = models.CharField(max_length=20)
+    # 地址
+    address = models.CharField(max_length=256)
+    # 头像
+    img = models.CharField(max_length=100)
+    # 等级
+    rank = models.IntegerField(default=1)
+    # token
+    token = models.CharField(max_length=100)
+
+- 注册
+- 登录
+- 退出
+```
+
+## 八、购物车
+- 购物车 模型类
+```
+用户id
+商品id
+数量number
+选中isselect
+```
+
+- 商品的添加删减
+```
+
+```
+
 
 ## 其他
 ```

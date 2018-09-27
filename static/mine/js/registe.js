@@ -14,4 +14,22 @@ $(function () {
             }
         })
     })
+
+    $('#password').blur(function () {
+        var password = $(this).val()
+        if(password.length<6 || password.length>12){
+            $('#passworderr').show()
+        } else {
+            $('#passworderr').hide()
+        }
+    })
+
+    $('#mypassword').blur(function () {
+        var mypassword = $(this).val()
+        if (mypassword.length < 6 || mypassword.length > 12 || mypassword != $('#password').val()) {
+            $('#mypassworderr').show()
+        } else {
+            $('#mypassworderr').hide()
+        }
+    })
 })

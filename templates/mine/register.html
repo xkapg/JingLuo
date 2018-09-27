@@ -18,19 +18,21 @@
         {% csrf_token %}
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">账号</span>
-            <input id="account" type="text" class="form-control" placeholder="6~12位数" aria-describedby="basic-addon1" name="account">
+            <input id="account" type="text" class="form-control" placeholder="账号" aria-describedby="basic-addon1" name="account">
         </div>
         <span class="error" id="accounterr"></span>
 
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">密码</span>
-            <input type="password" class="form-control" placeholder="6~12位数" aria-describedby="basic-addon1" name="password">
+            <input type="password" class="form-control" placeholder="6~12位数" aria-describedby="basic-addon1" name="password" id="password">
         </div>
+        <span class="error" id="passworderr">密码格式不正确</span>
 
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">验证</span>
-            <input type="password" class="form-control" placeholder="6~12位数" aria-describedby="basic-addon1" name="mypassword">
+            <input type="password" class="form-control" placeholder="6~12位数" aria-describedby="basic-addon1" name="mypassword" id="mypassword">
         </div>
+        <span class="error" id="mypassworderr">密码输入不一致</span>
 
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">大名</span>

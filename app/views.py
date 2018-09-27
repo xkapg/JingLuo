@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from Python1807AXF import settings
-from app.models import Wheel, Nav, Mustbuy, Shop, MainShow, Foodtypes, Goods, User
+from app.models import Wheel, Nav, Mustbuy, Shop, MainShow, Foodtypes, Goods, User, Cart
 
 
 # 首页
@@ -83,13 +83,22 @@ def market(request, categoryid, childid, sortid):
     elif sortid == '3': # 价格最高
         goodslist= goodslist.order_by('-price')
 
+
+    # 购物车数量问题
+    token = request.session.get('token')
+    carts = []
+    if token:
+        user = User.objects.get(token=token)
+        carts = Cart.objects.filter(user=user).exclude(number=0)
+
     data = {
         'title': '闪购超市',
         'foodtypes':foodtypes,
         'goodslist':goodslist,
         'childlist':childlist,
         'categoryid':categoryid,
-        'childid':childid
+        'childid':childid,
+        'carts': carts
     }
 
     return render(request, 'market/market.html', context=data)
@@ -192,7 +201,7 @@ def login(request):
     elif request.method == 'GET':
         return render(request, 'mine/login.html')
 
-
+# 用户验证
 def checkuser(request):
     account = request.GET.get('account')
     try:
@@ -200,3 +209,49 @@ def checkuser(request):
         return JsonResponse({'msg':'用户名存在!', 'status':'-1'})
     except:
         return JsonResponse({'msg':'用户名可用!', 'status':'1'})
+
+# 添加购物车
+def addtocart(request):
+    # goodsid
+    goodsid = request.GET.get('goodsid')
+    token = request.session.get('token')
+
+    responseData = {
+        'msg':'',
+        'status':''
+    }
+
+    if token:   # 登录
+        user = User.objects.get(token=token)
+        goods = Goods.objects.get(pk=goodsid)
+
+        carts = Cart.objects.filter(goods=goods).filter(user=user)
+        if carts.exists():  # 存在
+            cart = carts.first()
+            cart.number = cart.number + 1
+            if goods.storenums < cart.number:
+                cart.number = goods.storenums
+            cart.save()
+            responseData['msg'] = '添加购物车成功'
+            responseData['status'] = 1
+            responseData['number'] = cart.number
+            return JsonResponse(responseData)
+        else:           # 不在
+            cart = Cart()
+            cart.user = user
+            cart.goods = goods
+            cart.number = 1
+            cart.save()
+
+            responseData['msg'] = '添加购物车成功'
+            responseData['status'] = 1
+            responseData['number'] = cart.number
+            return JsonResponse(responseData)
+    else:       # 未登录
+        # ajax请求操作，是重定向不了的！
+        # return redirect('axf:login')
+
+        responseData['msg'] = '请登录后操作'
+        responseData['status'] = '-1'
+
+        return JsonResponse(responseData)
