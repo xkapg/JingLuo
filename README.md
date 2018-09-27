@@ -14,7 +14,7 @@ git clone https://github.com/iphone3/Python1807AXF.git
 ## 三、安装项目依赖
 ```
 # 切换到项目目录中
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 > pip是Python3的版本!
 
