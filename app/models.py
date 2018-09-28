@@ -148,7 +148,6 @@ class User(models.Model):
     # token
     token = models.CharField(max_length=100)
 
-
 # 购物车 模型类
 class Cart(models.Model):
     # 用户

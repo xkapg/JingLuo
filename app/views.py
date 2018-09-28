@@ -105,7 +105,25 @@ def market(request, categoryid, childid, sortid):
 
 # 购物车
 def cart(request):
-    return render(request, 'cart/cart.html')
+    token = request.session.get('token')
+    carts = []
+    if token:   # 已登录
+        # 根据token获取对应用户
+        user = User.objects.get(token=token)
+        # 根据用户，获取对应购物车 数据
+        carts = Cart.objects.filter(user=user).exclude(number=0)
+
+    # 一个班级 对应 多个学生
+    # 班级主表
+    # 学生从表 【声明关系】
+
+    responseDatra = {
+        'title': '购物车',
+        'carts': carts
+    }
+
+
+    return render(request, 'cart/cart.html', context=responseDatra)
 
 # 我的
 def mine(request):
@@ -255,3 +273,61 @@ def addtocart(request):
         responseData['status'] = '-1'
 
         return JsonResponse(responseData)
+
+# 购物车删减
+def subtocart(request):
+    token = request.session.get('token')
+    user = User.objects.get(token=token)
+    goodsid = request.GET.get('goodsid')
+    goods = Goods.objects.get(pk=goodsid)
+
+    # 删减操作
+    carts = Cart.objects.filter(user=user).filter(goods=goods)
+    cart = carts.first()
+    cart.number = cart.number - 1
+    cart.save()
+
+    responseData = {
+        'msg': '删减成功',
+        'status': '1',
+        'number': cart.number
+    }
+
+    return JsonResponse(responseData)
+
+# 修改选中状态
+def changecartstatus(request):
+    cartid = request.GET.get('cartid')
+    cart = Cart.objects.get(pk=cartid)
+    cart.isselect = not cart.isselect
+    cart.save()
+
+    responseData = {
+        'msg':'修改状态成功',
+        'status':'1',
+        'isselect': cart.isselect
+    }
+
+    return JsonResponse(responseData)
+
+# 全选/取消全选
+def changecartselect(request):
+    isall = request.GET.get('isall')
+    if isall == 'true':
+        isall = True
+    else:
+        isall = False
+
+    token = request.session.get('token')
+    user = User.objects.get(token=token)
+    carts = Cart.objects.filter(user=user)
+    for cart in carts:
+        cart.isselect = isall
+        cart.save()
+
+    responseData = {
+        'status': '1',
+        'msg':'全选/取消全选 操作成功'
+    }
+
+    return JsonResponse(responseData)

@@ -106,4 +106,24 @@ $(function () {
             }
         })
     })
+
+
+    // 减操作
+    $('.bt-wrapper>.glyphicon-minus').click(function () {
+        var goodsid = $(this).attr('goodsid')
+        var $that = $(this)
+
+        $.get('/axf/subtocart/', {'goodsid':goodsid}, function (response) {
+            console.log(response)
+            if (response['status'] == '1'){
+                var number = parseInt(response['number'])
+                if (number>0){  // 显示
+                    $that.next().html(response['number'])
+                } else {    // 隐藏
+                    $that.next().hide()
+                    $that.hide()
+                }
+            }
+        })
+    })
 })

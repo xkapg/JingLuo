@@ -15,4 +15,7 @@ urlpatterns = [
     url(r'checkuser/$', views.checkuser, name='checkuser'), # 用户名验证
 
     url(r'^addtocart/$', views.addtocart, name='addtocart'),    # 添加到购物车
+    url(r'^subtocart/$', views.subtocart, name='subtocart'),    # 购物车删减
+    url(r'changecartstatus/$', views.changecartstatus, name='changecartstatus'), # 修改选中状态
+    url(r'^changecartselect/$', views.changecartselect, name='changecartselect'),   # 全选/取消全选
 ]
