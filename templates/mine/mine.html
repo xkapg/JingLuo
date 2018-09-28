@@ -39,8 +39,13 @@
             <ul>
                 <li>
                     <a href="#">
-                        <dl>
-                            <dt><span class="glyphicon glyphicon-gift"></span></dt>
+                        <dl class="item">
+                            <dt>
+                                <span class="glyphicon glyphicon-gift"></span>
+                                {% if wait_pay %}
+                                    <i class="badge">{{ wait_pay }}</i>
+                                {% endif %}
+                            </dt>
                             <dd> 待付款 </dd>
                         </dl>
                     </a>
@@ -48,8 +53,13 @@
 
                 <li>
                     <a href="#">
-                        <dl>
-                            <dt> <span class="glyphicon glyphicon-leaf"></span> </dt>
+                        <dl class="item">
+                            <dt>
+                                <span class="glyphicon glyphicon-leaf"></span>
+                                {% if payed %}
+                                    <i class="badge">{{ payed }}</i>
+                                {% endif %}
+                            </dt>
                             <dd> 待收货 </dd>
                         </dl>
                     </a>

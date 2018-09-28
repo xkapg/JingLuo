@@ -1,13 +1,11 @@
 import hashlib
 import os
 import uuid
-
 from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-
 from Python1807AXF import settings
-from app.models import Wheel, Nav, Mustbuy, Shop, MainShow, Foodtypes, Goods, User, Cart
+from app.models import Wheel, Nav, Mustbuy, Shop, MainShow, Foodtypes, Goods, User, Cart, Order,OrderGoods
 
 
 # 首页
@@ -130,7 +128,9 @@ def mine(request):
     token = request.session.get('token')
 
     responseData = {
-        'title': '我的'
+        'title': '我的',
+        'payed': 0,
+        'wait_pay': 0
     }
 
     if token:   # 登录
@@ -139,6 +139,21 @@ def mine(request):
         responseData['rank'] = user.rank
         responseData['img'] = '/static/uploads/' + user.img
         responseData['islogin'] = True
+
+        # 获取订单信息
+        orders = Order.objects.filter(user=user)
+        payed = 0   # 已付款
+        wait_pay = 0    # 待付款
+        for order in orders:
+            if order.status == 1:
+                wait_pay += 1
+            elif order.status == 2:
+                payed += 1
+
+        responseData['payed'] = payed
+        responseData['wait_pay'] = wait_pay
+
+
     else:       # 未登录
         responseData['name'] = '未登录'
         responseData['rank'] = '无等级(未登录)'
@@ -328,6 +343,68 @@ def changecartselect(request):
     responseData = {
         'status': '1',
         'msg':'全选/取消全选 操作成功'
+    }
+
+    return JsonResponse(responseData)
+
+# 下单
+def generateorder(request):
+    token = request.session.get('token')
+    if token:
+        user = User.objects.get(token=token)
+        # 生成订单
+        order = Order()
+        order.user = user
+        order.number = str(uuid.uuid5(uuid.uuid4(), 'order'))
+        order.save()
+
+        carts = Cart.objects.filter(user=user).filter(isselect=True)
+        for cart in carts:
+            # 订单商品
+            orderGoods = OrderGoods()
+            orderGoods.order = order
+            orderGoods.goods = cart.goods
+            orderGoods.number = cart.number
+            orderGoods.save()
+
+            # 移除购物车
+            cart.delete()
+
+        responseData = {
+            'status': '1',
+            'msg': '订单生成成功(未付款)!',
+            'orderid': order.id
+         }
+
+        return JsonResponse(responseData)
+
+    else:
+        return  JsonResponse({'msg':'用户登录后再操作'})
+
+# 订单详情
+def orderinfo(request):
+    orderid = request.GET.get('orderid')
+    order = Order.objects.get(pk=orderid)
+
+    data = {
+        'title':'订单详情',
+        'order': order,
+    }
+
+    return render(request,'order/orderinfo.html', context=data)
+
+# 订单处理
+def changeorderstatusm(request):
+    orderid = request.GET.get('orderid')
+    status = request.GET.get('status')
+
+    order = Order.objects.get(pk=orderid)
+    order.status = status
+    order.save()
+
+    responseData = {
+        'msg':'付款成功',
+        'status':1
     }
 
     return JsonResponse(responseData)

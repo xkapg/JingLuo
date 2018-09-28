@@ -76,7 +76,6 @@ $(function () {
             // 选中，才计算
             if ($confirm.find('.glyphicon-ok').length){
                 var price = parseInt($content.find('.price').attr('str'))
-                console.log(price)
                 var num = parseInt($content.find('.num').attr('str'))
                 sum += num * price
             }
@@ -85,4 +84,16 @@ $(function () {
         // 修改总计 显示
         $('.bill .total b').html(sum)
     }
+
+
+    // 下单
+    $('#generate-order').click(function () {
+        $.get('/axf/generateorder/', function (response) {
+            console.log(response)
+            if (response['status'] == '1'){ // 订单详情(付款)
+                var orderid = response['orderid']
+                window.open('/axf/orderinfo/?orderid='+orderid, target='_self')
+            }
+        })
+    })
 })
