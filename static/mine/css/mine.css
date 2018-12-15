@@ -7,12 +7,12 @@ footer .mine span {
     background-image: url(/static/base/img/mine1.png);
 }
 footer .mine dd {
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 .mine .user-wrapper{
     height: 6rem;
-    background: pink;
+    background: #1471ff;
     display: flex;
     padding: 0.8rem;
     position: relative;
@@ -48,7 +48,7 @@ footer .mine dd {
 
 .mine .collect{
     line-height: 2rem;
-    background: #f0e000;
+    background: #00a6ff;
     text-align: center;
 }
 .mine .collect span,

@@ -156,8 +156,8 @@ def mine(request):
 
     else:       # 未登录
         responseData['name'] = '未登录'
-        responseData['rank'] = '无等级(未登录)'
-        responseData['img'] = '/static/uploads/axf.png'
+        responseData['rank'] = '未登录'
+        responseData['img'] = '/static/uploads/jjl.png'
         responseData['islogin'] = False
 
     return render(request, 'mine/mine.html', context=responseData)

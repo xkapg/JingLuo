@@ -8,7 +8,7 @@ footer .cart span {
     background-image: url(/static/base/img/cart1.png);
 }
 footer .cart dd {
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 
@@ -80,7 +80,7 @@ footer .cart dd {
 
 .order .bill .bill-right{
     width: 25%;
-    background: #ffd601;
+    background: #00a6ff;
     text-align: center;
     color: white;
 }

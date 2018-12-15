@@ -6,7 +6,7 @@ footer .home span {
     background-image: url(/static/base/img/home1.png);
 }
 footer .home dd {
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 /* 头部轮播图部分*/
@@ -145,7 +145,7 @@ footer .home dd {
     right: 0.2rem;
 }
 .main .main-wrapper .title span{
-    background-color: #ffd601;
+    background-color: #00a6ff;
     width: 1rem;
     height: 0.2rem;
     /* 居中设置(20-1)/2*/

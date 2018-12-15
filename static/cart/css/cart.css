@@ -8,7 +8,7 @@ footer .cart span {
     background-image: url(/static/base/img/cart1.png);
 }
 footer .cart dd {
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 .cart .no{
@@ -19,7 +19,7 @@ footer .cart dd {
     border: 1px solid grey;
 }
 .cart .glyphicon-ok{
-    background: #ffd601;
+    background: #00a6ff;
     color: white;
     border-radius: 50%;
     width: 1rem;
@@ -121,13 +121,13 @@ footer .cart dd {
 }
 .cart .bill .bill-left .total b{
     font-weight: normal;
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 
 .cart .bill .bill-right{
     width: 25%;
-    background: #ffd601;
+    background: #00a6ff;
     text-align: center;
     color: white;
 }

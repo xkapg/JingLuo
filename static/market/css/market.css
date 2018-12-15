@@ -9,7 +9,7 @@ footer .market span {
     background-image: url(/static/base/img/market1.png);
 }
 footer .market dd {
-    color: #ffd601;
+    color: #00a6ff;
 }
 
 
@@ -34,7 +34,7 @@ footer .market dd {
     position: relative;
 }
 .market .type-slider ul li span{
-    background: #ffd601;
+    background: #00a6ff;
     width: 0.2rem;
     height: 1rem;
     position: absolute;
